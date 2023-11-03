@@ -25,11 +25,16 @@ require 'classes/voiture.class.php';
         //Je regarde le tableau de bord
         echo $maPorsche->getMessage() . "<br>";
 
-        $maPorsche->repeindre("Vert");
+        $maPorsche->repeindre("Bleu");
         echo $maPorsche->getMessage() . "<br>";
 
         $maPorsche->Mettre_essence(30);
         echo $maPorsche->getMessage() . "<br>";
+
+        $maPorsche->Se_deplacer(100, 130);
+        echo $maPorsche->getMessage() . "<br>";
+
+        echo $maPorsche;
     ?>
 </body>
 </html>

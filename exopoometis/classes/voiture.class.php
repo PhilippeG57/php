@@ -97,4 +97,39 @@ class Voiture {
         }
         return $this->niveau_essence;
     }
+
+    private function consommer($distance, $vitesse){
+        $conso = 0;
+
+        //calcul du carburant consommé
+        if($vitesse<50){
+            $conso = $distance * 0.1;
+        }elseif($vitesse<90){
+            $conso = $distance * 0.05;
+        }elseif($vitesse<130){
+            $conso = $distance * 0.08;
+        }else{
+            $conso = $distance * 0.12;
+        }
+        return $conso;
+    }
+
+    public function Se_deplacer($distance, $vitesse){
+        $conso = $this->consommer($distance, $vitesse);
+        //echo $conso;
+        if($conso> $this->niveau_essence){
+            $this->message = $distance.'km à '.$vitesse.'km/h : erreur : pas assez de carburant pour ce trajet !';
+        }else{
+            // on met a jour le niveau de carburant
+            $this->niveau_essence-=$conso;
+            $this->message = $distance.'km à '.$vitesse.'km/h, tu as consommé '.$conso.' litres. Il vous reste '.$this->niveau_essence.' litres dans le reservoir';
+        }
+    }
+
+    public function __toString(){
+        /* return "Véhicule $this->immatriculation ; puissance $this->puissance cv ;
+        couleur $this->couleur; */
+        $msg = "Véhicule %s ; puissance %d cv ; couleur %s";
+        return sprintf($msg, $this->immatriculation, $this->puissance, $this->couleur);
+    }
 }
